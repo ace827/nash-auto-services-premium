@@ -60,16 +60,6 @@ p{color:var(--mid)}
 .btn-d:hover{background:var(--navy2);transform:translateY(-2px)}
 .btn-sm{padding:11px 20px;min-height:44px;font-size:.86rem}
 
-/* Topbar */
-.topbar{background:var(--ink);color:rgba(255,255,255,.72);font-size:.82rem;padding:10px 0}
-.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.tb-l{display:flex;gap:22px;flex-wrap:wrap}
-.tb-i{display:flex;align-items:center;gap:8px}
-.tb-i svg{width:15px;height:15px;color:var(--amber2)}
-.tb-r{display:flex;align-items:center;gap:14px}
-.tb-phone{color:#fff;font-weight:700;display:flex;align-items:center;gap:7px}
-.tb-phone svg{width:15px;height:15px;color:var(--amber2)}
-
 /* Nav */
 nav{position:sticky;top:0;z-index:900;background:rgba(10,21,34,.94);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08);transition:background .3s,box-shadow .3s}
 nav.scrolled{background:rgba(10,21,34,.99);box-shadow:0 4px 30px rgba(0,0,0,.35)}
@@ -183,10 +173,20 @@ nav.scrolled{background:rgba(10,21,34,.99);box-shadow:0 4px 30px rgba(0,0,0,.35)
 /* About */
 .about{display:grid;grid-template-columns:.95fr 1.05fr;gap:60px;align-items:center}
 .about-media{position:relative}
-.about-media img{border-radius:var(--r);aspect-ratio:3/4;object-fit:cover;box-shadow:var(--shadow-lg);width:100%}
-.badge-fl{position:absolute;right:-22px;bottom:34px;background:var(--white);border-radius:14px;padding:20px 26px;box-shadow:var(--shadow-lg);text-align:center;border-top:4px solid var(--amber)}
-.badge-fl .b1{font-family:'Raleway';font-weight:900;font-size:2rem;color:var(--navy);line-height:1}
-.badge-fl .b2{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);font-weight:700;margin-top:6px}
+.trust{background:var(--navy);color:#fff;border-radius:18px;padding:clamp(28px,3.5vw,40px);box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+.trust::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:34px 34px}
+.trust>*{position:relative;z-index:2}
+.trust-top{display:flex;align-items:center;gap:20px;padding-bottom:26px;margin-bottom:26px;border-bottom:1px solid rgba(255,255,255,.14)}
+.trust-score{font-family:'Raleway';font-weight:900;font-size:clamp(3rem,6vw,4.2rem);color:var(--amber2);line-height:.9}
+.trust-stars{display:flex;gap:4px;margin-bottom:6px}
+.trust-stars svg{width:18px;height:18px;color:var(--amber2)}
+.trust-sub{font-size:.85rem;color:rgba(255,255,255,.66)}
+.trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.trust-grid>div{display:flex;flex-direction:column;gap:4px}
+.tg-n{font-family:'Raleway';font-weight:900;font-size:1.7rem;color:#fff;line-height:1}
+.tg-l{font-size:.82rem;color:rgba(255,255,255,.6);line-height:1.4}
+.trust-foot{display:flex;align-items:center;gap:9px;margin-top:28px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14);font-size:.85rem;color:rgba(255,255,255,.72)}
+.trust-foot svg{width:17px;height:17px;color:var(--amber2);flex:none}
 .about ul{list-style:none;margin:26px 0}
 .about li{display:flex;gap:13px;padding:11px 0;font-size:.98rem;color:var(--dark)}
 .about li svg{width:21px;height:21px;color:var(--amber);flex:none;margin-top:3px}
@@ -303,8 +303,6 @@ footer ul a:hover{color:var(--amber2)}
   .svcs{grid-template-columns:1fr 1fr}
   .rgrid{grid-template-columns:1fr 1fr}
   .about{grid-template-columns:1fr;gap:40px}
-  .about-media img{aspect-ratio:16/9;max-height:420px}
-  .badge-fl{right:20px;bottom:20px}
   .area{grid-template-columns:1fr;gap:34px}
   .cgrid{grid-template-columns:1fr;gap:34px}
   .fgrid{grid-template-columns:1fr 1fr;gap:32px}
@@ -312,8 +310,6 @@ footer ul a:hover{color:var(--amber2)}
 @media(max-width:768px){
   .nlinks,.nav-in .btn{display:none}
   .burger{display:flex}
-  .topbar .tb-l{display:none}
-  .topbar .wrap{justify-content:center}
   .stats-g{grid-template-columns:1fr 1fr;gap:28px}
   .stat+.stat{border-left:none}
   .stat:nth-child(3),.stat:nth-child(4){padding-top:22px;border-top:1px solid rgba(255,255,255,.12)}
@@ -326,7 +322,7 @@ footer ul a:hover{color:var(--amber2)}
   .hero .wrap{padding-top:50px;padding-bottom:56px}
   .fgrid{grid-template-columns:1fr;gap:28px}
   .fbot{flex-direction:column;text-align:center}
-  .badge-fl{position:static;margin-top:-30px;margin-left:auto;margin-right:auto;width:max-content;position:relative;z-index:3}
+  .trust-grid{grid-template-columns:1fr 1fr;gap:18px}
 }
 @media(max-width:480px){
   .wrap{padding:0 18px}
@@ -366,17 +362,6 @@ footer ul a:hover{color:var(--amber2)}
 <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
 <symbol id="i-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="9" y1="7" x2="9" y2="7"/><line x1="15" y1="7" x2="15" y2="7"/><line x1="9" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="15" y2="12"/><line x1="10" y1="22" x2="14" y2="22"/></symbol>
 </defs></svg>
-
-<div class="topbar">
-  <div class="wrap">
-    <div class="tb-l">
-      <span class="tb-i"><svg><use href="#i-pin"/></svg> 913 S Glendale Ave, Glendale, CA 91205</span>
-      <span class="tb-i"><svg><use href="#i-clock"/></svg> Mon&ndash;Fri &middot; Open until 6 PM</span>
-      <span class="tb-i"><svg><use href="#i-star"/></svg> 4.5 Stars &middot; 54 Google Reviews</span>
-    </div>
-    <div class="tb-r"><a class="tb-phone" href="tel:+18185485700"><svg><use href="#i-phone"/></svg> (818) 548-5700</a></div>
-  </div>
-</div>
 
 <nav id="nav">
   <div class="wrap nav-in">
@@ -598,8 +583,22 @@ footer ul a:hover{color:var(--amber2)}
 <section class="sec svc-sec" id="about">
   <div class="wrap about">
     <div class="about-media rl">
-      <img src="https://images.pexels.com/photos/4305364/pexels-photo-4305364.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Smiling experienced workman in a workshop">
-      <div class="badge-fl"><div class="b1">4.5</div><div class="b2">54 Google Reviews</div></div>
+      <div class="trust">
+        <div class="trust-top">
+          <div class="trust-score">4.5</div>
+          <div>
+            <div class="trust-stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
+            <div class="trust-sub">54 verified Google reviews</div>
+          </div>
+        </div>
+        <div class="trust-grid">
+          <div><span class="tg-n">8+</span><span class="tg-l">Years of repeat customers</span></div>
+          <div><span class="tg-n">All</span><span class="tg-l">Makes and models serviced</span></div>
+          <div><span class="tg-n">100%</span><span class="tg-l">Quotes approved before work</span></div>
+          <div><span class="tg-n">1</span><span class="tg-l">Mechanic who knows your car</span></div>
+        </div>
+        <div class="trust-foot"><svg><use href="#i-pin"/></svg> 913 S Glendale Ave, Glendale, CA 91205</div>
+      </div>
     </div>
     <div class="rr">
       <span class="eyebrow">Our Story</span>
